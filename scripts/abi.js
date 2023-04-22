@@ -1,3 +1,4 @@
+// export const contractAddress = "0x2F8b88144ea484de7bCf0879C70Bfc66bAb93586";
 export const contractAddress = "0x2F8b88144ea484de7bCf0879C70Bfc66bAb93586";
 export const publicKey =`-----BEGIN PUBLIC KEY-----
 MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0+YZYcw5tw4kSNgZBRIL

@@ -44,6 +44,7 @@ function HomePage() {
             const encrypted = crypto.publicEncrypt(publicKey, Buffer.from(phone, 'utf-8'));
             const hexEncrypted = encrypted.toString('hex');
             const signer = await getProviderOrSigner(true);
+            console.log(signer)
             const contract= new ethers.Contract(contractAddress, contractABI ,signer);
             await contract.register(9,proof.proofJson.proof,proof.proofJson.inputs, wallet, `0x${hexEncrypted}`);
             setOtpSent(true);
@@ -199,7 +200,6 @@ function HomePage() {
         {renderButton()}
       </div>
       <div>
-        <img className={styles.image} src="./crypto-devs.svg" />
       </div>
     </div>
 
