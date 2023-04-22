@@ -1,0 +1,33 @@
+{
+  "name": "text-test-tutorial",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
+    "@mui/material": "^5.12.1",
+    "axios": "^1.3.6",
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.4",
+    "crypto": "^1.0.1",
+    "dotenv": "^16.0.3",
+    "ethers": "^5.7.2",
+    "express": "^4.16.3",
+    "net": "^1.0.2",
+    "next": "^13.3.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-otp-input": "^3.0.0",
+    "react-phone-input-2": "^2.15.1",
+    "twilio": "^3.84.1",
+    "web3": "^1.9.0",
+    "web3modal": "^1.9.12",
+    "zokrates-js": "^1.1.8"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  }
+}
