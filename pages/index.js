@@ -8,6 +8,7 @@ import 'react-phone-input-2/lib/style.css'
 import axios from "axios";
 import crypto from "crypto";
 import { contractABI, contractAddress, publicKey } from "../scripts/abi";
+import OTPInput from "react-otp-input";
 
 
 const ethers = require("ethers");
@@ -27,7 +28,7 @@ function HomePage() {
     const generateProof=async()=>{
         try {
             const phoneArr = phone.split("");
-            const res = await axios.post("http://localhost:3001/generate-proof", {arr: phoneArr});
+            const res = await axios.post("http://20.100.177.200:3001/generate-proof", {arr: phoneArr});
             setProof(res.data)
             console.log(proof)
             console.log(res)
@@ -63,12 +64,30 @@ function HomePage() {
             
     }
 
+    const checkVerifiedStatus = async(address)=>{
+        try {
+        const provider = await getProviderOrSigner();
+        const contract= new ethers.Contract(contractAddress, contractABI, provider);
+        const res = await contract.verified(address);
+        setVerified(res)
+        } catch (error) {
+            console.log(error)
+            alert(error.message)
+        }
+            
+    }
+
     const connectWallet = async () => {
         try {
-          const signer = await getProviderOrSigner(true);
+            await window.ethereum.enable()
+          const provider = await getProviderOrSigner();
+          const signer = provider.getSigner();
           const address = await signer.getAddress();
+          console.log(provider)
           setWallet(address);
           setWalletConnected(true);
+          console.log("ad", address, wallet)
+          checkVerifiedStatus(address)
         } catch (err) {
           console.error(err);
         }
@@ -81,7 +100,7 @@ function HomePage() {
         //     providerOptions: {},
         //     disableInjectedProvider: false,
         //   });
-          connectWallet();
+            connectWallet();
         }
       }, [walletConnected]);
 
@@ -103,9 +122,14 @@ function HomePage() {
                 Connected Wallet : {wallet}
               </div>
 
-              <div className={styles.description}>
-                Verify Your Wallet
-              </div>
+              {!verified ? (
+                <div className={styles.description}>
+                    Verify Your Wallet
+                </div>
+            ) : (
+               "Wallet already verified"
+            )}
+              
 
               <PhoneInput
                 country={'in'}
@@ -133,7 +157,7 @@ function HomePage() {
             <div>
                 {otpSent ? (
                     <div>
-                         <OtpInput
+                         <OTPInput
                             value={otp}
                             onChange={setOtp}
                             numInputs={6}
