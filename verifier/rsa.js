@@ -3,23 +3,6 @@ const crypto = require('crypto');
 const fs = require('fs');
 const Web3 = require('web3');
 
-async function sendSMS(){
-    const accountSid = 'AC02de49e5111b04f88290c1471bc4d064';
-    const authToken = 'aeb3fd511941d6b32498f07d7699cc2f';
-    const client = require('twilio')(accountSid, authToken);
-
-    const phoneNumber = '+919129114';
-    const otp = '1234';
-
-    client.messages
-    .create({
-        body: `Your OTP is ${otp}`,
-        from: '+15202519473',
-        to: phoneNumber
-    })
-    .then(message => console.log(`SMS OTP sent to ${phoneNumber}: ${message.sid}`))
-    .catch(error => console.error(`Error sending SMS OTP to ${phoneNumber}: ${error}`));
-}
 
 // sendSMS()
 
